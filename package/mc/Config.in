@@ -1,0 +1,31 @@
+config BR2_PACKAGE_MC
+	bool "mc - Midnight Commander"
+	select BR2_PACKAGE_LIBGLIB2
+	select BR2_PACKAGE_SLANG2
+	select BR2_PACKAGE_E2FSPROGS
+	help
+	  midnight commander - a powerful file manager
+
+	  http://www.midnight-commander.org/
+
+ config BR2_PACKAGE_MC_STATIC
+   bool "Build mc as a static binary (no shared libs)"
+   depends on BR2_PACKAGE_MC
+   default n
+   help
+    If you want to build a static mc binary, which does not
+    use or require any shared libraries, then enable this option.
+    This can cause mc to be considerably larger, so you should
+    leave this option false unless you have a good reason (i.e.
+    your target platform does not support shared libraries, or
+    you are building an initrd which doesn't need anything but
+    mc, etc).
+
+    Most people will leave this set to 'N'.
+
+ config BR2_PACKAGE_MC_ANDROID
+   bool "Patch midnight commander for Android custom ROM"
+   depends on BR2_PACKAGE_MC
+   default n
+   help
+    Patch mc for Android specific terminfo location

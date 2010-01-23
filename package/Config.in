@@ -287,6 +287,8 @@ comment "text rendering libraries"
 source "package/ncurses/Config.in"
 source "package/newt/Config.in"
 source "package/slang/Config.in"
+source "package/slang2/Config.in"
+source "package/mc/Config.in"
 
 comment "text rendering applications"
 source "package/dialog/Config.in"

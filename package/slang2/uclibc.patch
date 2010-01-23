@@ -1,0 +1,11 @@
+--- slang-2.1.4.orig/src/slcommon.c	2009-11-07 17:26:19.000000000 +0100
++++ slang-2.1.4/src/slcommon.c	2009-11-07 17:28:30.000000000 +0100
+@@ -207,7 +207,7 @@
+    return p;
+ }
+ 
+-#if !defined(HAVE_ISSETUGID) && defined(__GLIBC__) && (__GLIBC__ >= 2)
++#if !defined(HAVE_ISSETUGID) && defined(__GLIBC__) && (__GLIBC__ >= 2) && !defined(__UCLIBC__)
+ extern int __libc_enable_secure;
+ # define HAVE___LIBC_ENABLE_SECURE 1
+ #endif

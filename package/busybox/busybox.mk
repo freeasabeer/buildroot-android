@@ -34,6 +34,7 @@ ifeq ($(BR2_PACKAGE_SYSKLOGD),y)
 	$(SED) "/#include.*busybox\.h/a#define CONFIG_SYSLOGD" $(BUSYBOX_DIR)/init/init.c
 endif
 	# Allow busybox patches.
+	toolchain/patch-kernel.sh $(BUSYBOX_DIR) package/busybox Makefile.patch
 ifeq ($(BR2_PACKAGE_BUSYBOX_SNAPSHOT),y)
 	toolchain/patch-kernel.sh $(BUSYBOX_DIR) package/busybox busybox.\*.patch
 else

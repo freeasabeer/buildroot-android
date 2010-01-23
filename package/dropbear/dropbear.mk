@@ -9,8 +9,28 @@ DROPBEAR_SOURCE = dropbear-$(DROPBEAR_VERSION).tar.gz
 DROPBEAR_SITE = http://matt.ucc.asn.au/dropbear/releases
 DROPBEAR_DEPENDENCIES = zlib
 DROPBEAR_TARGET_BINS = dbclient dropbearkey dropbearconvert scp ssh
-DROPBEAR_MAKE =	$(MAKE) MULTI=1 SCPPROGRESS=1 \
-		PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp"
+# make PROGRAMS="dropbear dbclient scp" MULTI=1 STATIC=1 SCPPROGRESS=1
+#DROPBEAR_MAKE =	$(MAKE) MULTI=1 SCPPROGRESS=1 \
+#		PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp"
+DROPBEAR_MAKE =	$(MAKE) MULTI=1 STATIC=1 SCPPROGRESS=1 \
+		PROGRAMS="dropbear dbclient dropbearkey scp"
+DROPBEAR_CONF_OPT=--prefix=/system --bindir=/system/xbin --disable-loginfunc --disable-utmp --disable-utmpx --disable-wtmp --disable-wtmpx --disable-lastlog
+
+define DROPBEAR_CONFIGURE_CMDS
+  (cd $(@D) && rm -rf config.cache && \
+  $(TARGET_CONFIGURE_OPTS) \
+  $(TARGET_CONFIGURE_ARGS) \
+  $(TARGET_CONFIGURE_ENV) \
+  $(DROPBEAR_CONF_ENV) \
+  ./configure \
+    --cache-file="$(BUILD_DIR)/tgt-config.cache" \
+    --target=$(GNU_TARGET_NAME) \
+    --host=$(GNU_TARGET_NAME) \
+    --build=$(GNU_HOST_NAME) \
+    ./configure \
+    $(DROPBEAR_CONF_OPT) \
+  )
+endef
 
 $(eval $(call AUTOTARGETS,package,dropbear))
 

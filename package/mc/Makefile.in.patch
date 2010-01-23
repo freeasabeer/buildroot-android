@@ -1,0 +1,15 @@
+--- mc-4.6.2/src/Makefile.in.orig	2009-02-01 20:46:26.000000000 +0100
++++ mc-4.6.2/src/Makefile.in	2010-01-21 23:26:41.000000000 +0100
+@@ -433,10 +433,10 @@
+ 	$(LINK) $(man2hlp_OBJECTS) $(man2hlp_LDADD) $(LIBS)
+ mc$(EXEEXT): $(mc_OBJECTS) $(mc_DEPENDENCIES) 
+ 	@rm -f mc$(EXEEXT)
+-	$(LINK) $(mc_OBJECTS) $(mc_LDADD) $(LIBS)
++	$(LINK) -static $(mc_OBJECTS) $(mc_LDADD) $(LIBS)
+ mcmfmt$(EXEEXT): $(mcmfmt_OBJECTS) $(mcmfmt_DEPENDENCIES) 
+ 	@rm -f mcmfmt$(EXEEXT)
+-	$(LINK) $(mcmfmt_OBJECTS) $(mcmfmt_LDADD) $(LIBS)
++	$(LINK) -statix $(mcmfmt_OBJECTS) $(mcmfmt_LDADD) $(LIBS)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)

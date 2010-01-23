@@ -1,0 +1,11 @@
+--- busybox-1.15.3/Makefile.orig	2009-12-12 22:18:16.000000000 +0100
++++ busybox-1.15.3/Makefile	2010-01-21 22:20:00.000000000 +0100
+@@ -597,7 +597,7 @@
+       "$(LDFLAGS) $(EXTRA_LDFLAGS)" \
+       "$(core-y)" \
+       "$(libs-y)" \
+-      "$(LDLIBS)"
++      "$(LDLIBS) resolv"
+ 
+ # Generate System.map
+ quiet_cmd_sysmap = SYSMAP

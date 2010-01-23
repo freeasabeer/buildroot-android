@@ -1,0 +1,11 @@
+--- screen-4.0.2.orig/Makefile.in	2009-11-09 15:13:41.000000000 +0100
++++ screen-4.0.2/Makefile.in	2009-11-09 15:16:58.000000000 +0100
+@@ -65,7 +65,7 @@
+ all:	screen
+ 
+ screen: $(OFILES)
+-	$(CC) $(LDFLAGS) -o $@ $(OFILES) $(LIBS)
++	$(CC) $(LDFLAGS) -static -o $@ $(OFILES) $(LIBS)
+ 
+ .c.o:
+ 	$(CC) -c -I. -I$(srcdir) $(M_CFLAGS) $(DEFS) $(OPTIONS) $(CFLAGS) $<

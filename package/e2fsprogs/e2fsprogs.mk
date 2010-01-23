@@ -68,6 +68,7 @@ E2FSPROGS_TXTTARGETS_ = \
 $(E2FSPROGS_HOOK_POST_INSTALL):
 	$(call MESSAGE,"Post installing")
 	# strip binaries
+	echo  "$(TARGET_DIR) $(E2FSPROGS_BINTARGETS_y)"
 	$(STRIPCMD) $(STRIP_STRIP_ALL) $(addprefix $(TARGET_DIR)/, $(E2FSPROGS_BINTARGETS_y))
 	# remove unneeded
 	rm -f $(addprefix $(TARGET_DIR)/, $(E2FSPROGS_BINTARGETS_))

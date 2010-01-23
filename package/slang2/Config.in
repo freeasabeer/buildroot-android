@@ -1,0 +1,10 @@
+config BR2_PACKAGE_SLANG2
+	bool "slang2"
+	select BR2_PACKAGE_PCRE
+	select BR2_PACKAGE_LIBPNG
+  select BR2_PACKAGE_LIBICONV
+	help
+	  Multi-platform console display library.
+	  Version 2
+	
+	  http://www.s-lang.org/

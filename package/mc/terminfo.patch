@@ -1,0 +1,17 @@
+--- mc-4.6.2.orig/slang/sltermin.c	2009-11-08 15:49:23.000000000 +0100
++++ mc-4.6.2/slang/sltermin.c	2009-11-08 15:55:10.000000000 +0100
+@@ -234,14 +234,7 @@
+ {
+    NULL, /* $HOME/.terminfo */
+    NULL, /* $TERMINFO */
+-   "/usr/share/terminfo",
+-   "/usr/lib/terminfo",
+-   "/usr/share/lib/terminfo",
+    "/etc/terminfo",
+-   "/usr/local/lib/terminfo",
+-#ifdef MISC_TERMINFO_DIRS
+-   MISC_TERMINFO_DIRS,
+-#endif
+    ""
+ };
+ 

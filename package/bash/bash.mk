@@ -66,6 +66,7 @@ $(BASH_DIR)/.configured: $(BASH_DIR)/.unpacked
 		$(DISABLE_LARGEFILE) \
 		--with-curses \
 		--enable-alias \
+    --enable-static \
 		--without-bash-malloc \
 		$(ENABLE_DEBUG) \
 	)

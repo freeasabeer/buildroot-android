@@ -1,0 +1,11 @@
+--- slang-2.1.4.orig/slsh/Makefile.in	2008-08-25 01:57:48.000000000 +0200
++++ slang-2.1.4/slsh/Makefile.in	2009-11-07 19:19:45.000000000 +0100
+@@ -64,7 +64,7 @@
+ #----------------------------------------------------------------------------
+ @SET_MAKE@
+ SHELL = /bin/sh
+-INST_LIBS = $(RPATH) $(SLANG_INST_LIB) $(DEST_LIB_DIR) -lslang $(READLINE_LIB) $(OTHER_LIBS)
++INST_LIBS = $(RPATH) $(DEST_LIB_DIR) -lslang $(READLINE_LIB) $(OTHER_LIBS)
+ DEFS = -DSLSH_CONF_DIR='"$(SLSH_CONF_DIR)"' -DSLSH_PATH='"$(SLSH_LIB_DIR)"' \
+  -DSLSH_CONF_DIR_ENV='$(SLSH_CONF_DIR_ENV)' -DSLSH_LIB_DIR_ENV='$(SLSH_LIB_DIR_ENV)' \
+  -DSLSH_PATH_ENV='$(SLSH_PATH_ENV)' 
