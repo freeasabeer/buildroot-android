@@ -61,13 +61,13 @@ $(NCURSES_DIR)/.configured: $(NCURSES_DIR)/.patched
 		--libdir=/usr/lib \
 		--libexecdir=/usr/lib \
 		--sysconfdir=/etc \
-		--datadir=/usr/share \
+		--datadir=/etc \
 		--localstatedir=/var \
 		--includedir=/usr/include \
 		--mandir=/usr/man \
 		--infodir=/usr/info \
-		--with-terminfo-dirs=/usr/share/terminfo \
-		--with-default-terminfo-dir=/usr/share/terminfo \
+		--with-terminfo-dirs=/etc/terminfo \
+		--with-default-terminfo-dir=/etc/terminfo \
 		--with-shared --without-cxx --without-cxx-binding \
 		--without-ada --without-progs --disable-big-core \
 		$(DISABLE_NLS) $(DISABLE_LARGEFILE) \
@@ -89,7 +89,7 @@ $(STAGING_DIR)/usr/lib/libncurses.so.$(NCURSES_VERSION): $(NCURSES_DIR)/lib/libn
 	    bindir=$(STAGING_DIR)/bin \
 	    sbindir=$(STAGING_DIR)/sbin \
 	    libexecdir=$(STAGING_DIR)/usr/lib \
-	    datadir=$(STAGING_DIR)/usr/share \
+	    datadir=$(STAGING_DIR)/etc \
 	    sysconfdir=$(STAGING_DIR)/etc \
 	    localstatedir=$(STAGING_DIR)/var \
 	    libdir=$(STAGING_DIR)/usr/lib \
@@ -97,7 +97,7 @@ $(STAGING_DIR)/usr/lib/libncurses.so.$(NCURSES_VERSION): $(NCURSES_DIR)/lib/libn
 	    mandir=$(STAGING_DIR)/usr/man \
 	    includedir=$(STAGING_DIR)/usr/include \
 	    gxx_include_dir=$(STAGING_DIR)/usr/include/c++ \
-	    ticdir=$(STAGING_DIR)/usr/share/terminfo \
+	    ticdir=$(STAGING_DIR)/etc/terminfo \
 	    -C $(NCURSES_DIR) install
 	chmod a-x $(NCURSES_DIR)/lib/libncurses.so*
 	$(SED) 's^prefix="^prefix="$(STAGING_DIR)^' \
@@ -116,20 +116,20 @@ endif
 ifeq ($(BR2_PACKAGE_NCURSES_TARGET_MENU),y)
 	cp -dpf $(NCURSES_DIR)/lib/libmenu.so* $(TARGET_DIR)/usr/lib/
 endif
-	ln -snf /usr/share/terminfo $(TARGET_DIR)/usr/lib/terminfo
-	mkdir -p $(TARGET_DIR)/usr/share/terminfo/x
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm $(TARGET_DIR)/usr/share/terminfo/x
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm-color $(TARGET_DIR)/usr/share/terminfo/x
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/x/xterm-xfree86 $(TARGET_DIR)/usr/share/terminfo/x
-	mkdir -p $(TARGET_DIR)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt100 $(TARGET_DIR)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt102 $(TARGET_DIR)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt200 $(TARGET_DIR)/usr/share/terminfo/v
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/v/vt220 $(TARGET_DIR)/usr/share/terminfo/v
-	mkdir -p $(TARGET_DIR)/usr/share/terminfo/a
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/a/ansi $(TARGET_DIR)/usr/share/terminfo/a
-	mkdir -p $(TARGET_DIR)/usr/share/terminfo/l
-	cp -dpf $(STAGING_DIR)/usr/share/terminfo/l/linux $(TARGET_DIR)/usr/share/terminfo/l
+	ln -snf /etc/terminfo $(TARGET_DIR)/usr/lib/terminfo
+	mkdir -p $(TARGET_DIR)/etc/terminfo/x
+	cp -dpf $(STAGING_DIR)/etc/terminfo/x/xterm $(TARGET_DIR)/etc/terminfo/x
+	cp -dpf $(STAGING_DIR)/etc/terminfo/x/xterm-color $(TARGET_DIR)/etc/terminfo/x
+	cp -dpf $(STAGING_DIR)/etc/terminfo/x/xterm-xfree86 $(TARGET_DIR)/etc/terminfo/x
+	mkdir -p $(TARGET_DIR)/etc/terminfo/v
+	cp -dpf $(STAGING_DIR)/etc/terminfo/v/vt100 $(TARGET_DIR)/etc/terminfo/v
+	cp -dpf $(STAGING_DIR)/etc/terminfo/v/vt102 $(TARGET_DIR)/etc/terminfo/v
+	cp -dpf $(STAGING_DIR)/etc/terminfo/v/vt200 $(TARGET_DIR)/etc/terminfo/v
+	cp -dpf $(STAGING_DIR)/etc/terminfo/v/vt220 $(TARGET_DIR)/etc/terminfo/v
+	mkdir -p $(TARGET_DIR)/etc/terminfo/a
+	cp -dpf $(STAGING_DIR)/etc/terminfo/a/ansi $(TARGET_DIR)/etc/terminfo/a
+	mkdir -p $(TARGET_DIR)/etc/terminfo/l
+	cp -dpf $(STAGING_DIR)/etc/terminfo/l/linux $(TARGET_DIR)/etc/terminfo/l
 	-$(STRIPCMD) $(STRIP_STRIP_UNNEEDED) $@
 	touch -c $@
 
@@ -162,8 +162,8 @@ ncurses-source: $(DL_DIR)/$(NCURSES_SOURCE)
 
 ncurses-clean:
 	rm -f $(STAGING_DIR)/usr/lib/libncurses.so* $(TARGET_DIR)/usr/lib/libncurses.so*
-	rm -rf $(STAGING_DIR)/usr/share/tabset $(TARGET_DIR)/usr/share/tabset
-	rm -rf $(STAGING_DIR)/usr/share/terminfo $(TARGET_DIR)/usr/share/terminfo
+	rm -rf $(STAGING_DIR)/etc/tabset $(TARGET_DIR)/etc/tabset
+	rm -rf $(STAGING_DIR)/etc/terminfo $(TARGET_DIR)/etc/terminfo
 	rm -rf $(TARGET_DIR)/usr/lib/terminfo
 	-$(MAKE) -C $(NCURSES_DIR) clean
 

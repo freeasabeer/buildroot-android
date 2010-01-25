@@ -1,0 +1,11 @@
+--- htop-0.8.3/Makefile.in.orig	2009-06-23 15:53:41.000000000 +0200
++++ htop-0.8.3/Makefile.in	2010-01-25 00:21:36.000000000 +0100
+@@ -83,7 +83,7 @@
+ @HAVE_PLPA_TRUE@htop_DEPENDENCIES = $(top_builddir)/plpa-1.1/src/libplpa_included.la
+ htop_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(htop_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++	$(LDFLAGS) -lpthread -static -o $@
+ DEFAULT_INCLUDES = -I. -I$(top_builddir)/plpa-1.1/src@am__isrc@
+ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles
