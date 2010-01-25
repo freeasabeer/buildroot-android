@@ -63,6 +63,7 @@ endif
 source "package/enchant/Config.in"
 source "package/file/Config.in"
 source "package/gamin/Config.in"
+source "package/htop/Config.in"
 source "package/icu/Config.in"
 source "package/kexec/Config.in"
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
