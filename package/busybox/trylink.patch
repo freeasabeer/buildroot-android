@@ -1,0 +1,20 @@
+--- busybox-1.15.3/scripts/trylink.orig	2009-12-12 02:45:09.000000000 +0100
++++ busybox-1.15.3/scripts/trylink	2010-01-29 22:24:14.000000000 +0100
+@@ -132,6 +132,7 @@
+     all_needed=true
+     last_needed=false
+     for one in $LDLIBS; do
++  if test "$one" != "resolv"; then
+ 	without_one=`echo " $LDLIBS " | sed "s/ $one / /g" | xargs`
+ 	# "lib1 lib2 lib3" -> "-llib1 -llib2 -llib3"
+ 	l_list=`echo "$without_one" | sed -e 's/ / -l/g' -e 's/^/-l/' -e 's/^-l$//'`
+@@ -153,6 +154,9 @@
+ 	    echo " Library $one is needed, can't exclude it (yet)"
+ 	    last_needed=true
+ 	fi
++  else
++    echo "Library $one is needed, have to keep it !"
++  fi
+     done
+     # All libs were needed, can't remove any
+     $all_needed && break
