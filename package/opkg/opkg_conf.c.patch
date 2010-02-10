@@ -1,0 +1,11 @@
+--- opkg-519/libopkg/opkg_conf.c.orig	2010-02-05 10:10:53.000000000 +0100
++++ opkg-519/libopkg/opkg_conf.c	2010-02-05 10:12:05.000000000 +0100
+@@ -441,7 +441,7 @@ opkg_conf_init(void)
+ 	}
+ 
+ 	if (conf->offline_root)
+-		sprintf_alloc(&etc_opkg_conf_pattern, "%s/etc/opkg/*.conf", conf->offline_root);
++		sprintf_alloc(&etc_opkg_conf_pattern, "%s/data/local/opkg/*.conf", conf->offline_root);
+ 	else {
+ 		const char *conf_file_dir = getenv("OPKG_CONF_DIR");
+ 		if (conf_file_dir == NULL)

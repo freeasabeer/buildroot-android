@@ -1,0 +1,7 @@
+config BR2_PACKAGE_OPKG
+	bool "opkg"
+	help
+	  Opkg is a lightweight package management system based on Ipkg.
+
+	  http://code.google.com/p/opkg/
+

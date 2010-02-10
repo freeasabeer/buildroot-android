@@ -387,11 +387,13 @@ source "package/lzo/Config.in"
 source "package/lzop/Config.in"
 source "package/lzma/Config.in"
 source "package/zlib/Config.in"
+source "package/zip/Config.in"
 endmenu
 
 menu "Package managers"
 
 source "package/ipkg/Config.in"
+source "package/opkg/Config.in"
 source "package/portage/Config.in"
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
 source "package/rpm/Config.in"

@@ -1,0 +1,11 @@
+--- opkg-519/libopkg/opkg.c.orig	2010-02-05 10:08:25.000000000 +0100
++++ opkg-519/libopkg/opkg.c	2010-02-05 10:13:29.000000000 +0100
+@@ -41,6 +41,8 @@
+ 
+ #define progress(d, p) d.percentage = p; if (progress_callback) progress_callback (&d, user_data);
+ 
++#  define index(s,c) strchr((s), (c))
++
+ /** Private Functions ***/
+ 
+ static int
