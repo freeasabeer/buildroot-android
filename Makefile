@@ -303,6 +303,7 @@ include toolchain/kernel-headers/kernel-headers.mk
 include toolchain/mklibs/mklibs.mk
 include toolchain/sstrip/sstrip.mk
 include toolchain/uClibc/uclibc.mk
+include toolchain/ipkg-utils/ipkg-utils.mk
 else
 include toolchain/*/*.mk
 endif

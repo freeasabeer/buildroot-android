@@ -1,6 +1,6 @@
 #
 # Automatically generated make config: don't edit
-# Wed Feb 10 09:19:34 2010
+# Sun Feb 14 00:47:19 2010
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_VERSION="2010.02-git"
@@ -234,6 +234,7 @@ BR2_PACKAGE_SSTRIP_TARGET=y
 BR2_PACKAGE_SSTRIP_HOST=y
 # BR2_ENABLE_MULTILIB is not set
 BR2_CROSS_TOOLCHAIN_TARGET_UTILS=y
+BR2_PACKAGE_HOST_IPKG_UTILS=y
 
 #
 # Package Selection for the target

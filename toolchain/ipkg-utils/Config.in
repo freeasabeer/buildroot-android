@@ -1,0 +1,7 @@
+config BR2_PACKAGE_HOST_IPKG_UTILS
+	bool "Install ipkg-utils for the host/build system"
+	help
+	  Host scripts for building .ipk packages for the ipkg system.
+
+	  http://www.handhelds.org/download/packages/ipkg-utils/
+
