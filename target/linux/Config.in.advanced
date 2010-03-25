@@ -33,52 +33,38 @@ source "target/linux/Config.in.versions"
 
 config BR2_KERNEL_PATCH_LEVEL
 	string
+	default $(BR2_KERNEL_LATEST_2_6_33) if BR2_LINUX_2_6_33 && BR2_KERNEL_ADD_LATEST_MINORPATCH
+	default $(BR2_KERNEL_LATEST_2_6_32) if BR2_LINUX_2_6_32 && BR2_KERNEL_ADD_LATEST_MINORPATCH
+	default $(BR2_KERNEL_LATEST_2_6_31) if BR2_LINUX_2_6_31 && BR2_KERNEL_ADD_LATEST_MINORPATCH
 	default $(BR2_KERNEL_LATEST_2_6_30) if BR2_LINUX_2_6_30 && BR2_KERNEL_ADD_LATEST_MINORPATCH
 	default $(BR2_KERNEL_LATEST_2_6_29) if BR2_LINUX_2_6_29 && BR2_KERNEL_ADD_LATEST_MINORPATCH
 	default $(BR2_KERNEL_LATEST_2_6_28) if BR2_LINUX_2_6_28 && BR2_KERNEL_ADD_LATEST_MINORPATCH
 	default $(BR2_KERNEL_LATEST_2_6_27) if BR2_LINUX_2_6_27 && BR2_KERNEL_ADD_LATEST_MINORPATCH
-	default $(BR2_KERNEL_LATEST_2_6_26) if BR2_LINUX_2_6_26 && BR2_KERNEL_ADD_LATEST_MINORPATCH
-	default $(BR2_KERNEL_LATEST_2_6_25) if BR2_LINUX_2_6_25 && BR2_KERNEL_ADD_LATEST_MINORPATCH
-	default $(BR2_KERNEL_LATEST_2_6_24) if BR2_LINUX_2_6_24 && BR2_KERNEL_ADD_LATEST_MINORPATCH
 	default "$(BR2_KERNEL_MINORLEVEL)" if BR2_KERNEL_ADD_MINORPATCH
 
 config BR2_KERNEL_NEXT_VERSION
 	string
+	default "2.6.34" if BR2_LINUX_2_6_33
+	default "2.6.33" if BR2_LINUX_2_6_32
+	default "2.6.32" if BR2_LINUX_2_6_31
 	default "2.6.31" if BR2_LINUX_2_6_30
 	default "2.6.30" if BR2_LINUX_2_6_29
 	default "2.6.29" if BR2_LINUX_2_6_28
 	default "2.6.28" if BR2_LINUX_2_6_27
-	default "2.6.27" if BR2_LINUX_2_6_26
-	default "2.6.26" if BR2_LINUX_2_6_25
-	default "2.6.25" if BR2_LINUX_2_6_24
 
 config BR2_KERNEL_THIS_VERSION
 	string
+	default "2.6.33" if BR2_LINUX_2_6_33
+	default "2.6.32" if BR2_LINUX_2_6_32
 	default "2.6.31" if BR2_LINUX_2_6_31
 	default "2.6.30" if BR2_LINUX_2_6_30
 	default "2.6.29" if BR2_LINUX_2_6_29
 	default "2.6.28" if BR2_LINUX_2_6_28
 	default "2.6.27" if BR2_LINUX_2_6_27
-	default "2.6.26" if BR2_LINUX_2_6_26
-	default "2.6.25" if BR2_LINUX_2_6_25
-	default "2.6.24" if BR2_LINUX_2_6_24
 
 config BR2_KERNEL_SITE
 	string
 	default "http://ftp.kernel.org/pub/linux/kernel/v2.6"
-
-config BR2_MM_PATCH_SITE
-	string
-	default "http://ftp.kernel.org/pub/linux/kernel/people/akpm/patches/2.6"
-
-config BR2_MM_PATCH_DIR
-	string
-	default "$(BR2_DOWNLOAD_LINUX26_VERSION)/$(LINUX26_LATEST_MM_VERSION)" if BR2_KERNEL_ADD_LATEST_MM_PATCH
-	default "$(BR2_DOWNLOAD_LINUX26_VERSION)/$(BR2_LINUX26_MM_VERSION)" if BR2_KERNEL_ADD_MM_PATCH
-
-config BR2_RC_MM_PATCH_DIR
-	string
-	default "$(BR2_KERNEL_NEXT_VERSION)-rc$(BR2_KERNEL_RC_LEVEL)/2.6.$(BR2_KERNEL_NEXT_VERSION)-rc$(BR2_KERNEL_RC_LEVEL)-mm$(BR2_KERNEL_MM_LEVEL)"
 
 config BR2_KERNEL_PATCH_SITE
 	string
@@ -88,8 +74,6 @@ config BR2_KERNEL_PATCH_SITE
 	default "$(BR2_KERNEL_SITE)/testing" if 		BR2_KERNEL_ADD_RC_PATCH
 	default "$(BR2_KERNEL_SITE)/snapshots" if 		BR2_KERNEL_ADD_LATEST_SNAPSHOT
 	default "$(BR2_KERNEL_SITE)/snapshots" if 		BR2_KERNEL_ADD_SNAPSHOT
-	default "$(BR2_MM_PATCH_SITE)/$(BR2_MM_PATCH_DIR)/" if	BR2_KERNEL_ADD_LATEST_MM_PATCH
-	default "$(BR2_MM_PATCH_SITE)/$(BR2_MM_PATCH_DIR)/" if	BR2_KERNEL_ADD_MM_PATCH
 	default $(BR2_CUSTOM_LINUX26_PATCH_SITE) if 		BR2_LINUX26_CUSTOM
 
 config BR2_LINUX26_RC_VERSION
@@ -104,14 +88,6 @@ config BR2_LINUX26_RC_SNAPSHOT_VERSION
 	string
 	default "$(BR2_KERNEL_NEXT_VERSION)-rc$(BR2_KERNEL_RC_LEVEL)-git$(BR2_KERNEL_GIT_LEVEL)" if BR2_KERNEL_ADD_SNAPSHOT
 
-config BR2_LINUX26_MM_VERSION
-	string
-	default "$(BR2_KERNEL_THIS_VERSION)-mm$(BR2_KERNEL_MM_LEVEL)" if BR2_KERNEL_ADD_MM_PATCH
-
-config BR2_LINUX26_RC_MM_VERSION
-	string
-	default "$(BR2_KERNEL_NEXT_VERSION)-rc$(BR2_KERNEL_RC_LEVEL)-mm$(BR2_KERNEL_MM_LEVEL)" if BR2_KERNEL_ADD_MM_PATCH
-
 # ---------------------------------------------------------------------------
 
 choice
@@ -121,7 +97,19 @@ choice
 	  Select the specific Linux version you want to use
 
 config BR2_LINUX_2_6_STABLE
-	bool "The latest stable Linux kernel (2.6.30.2)"
+	bool "The latest stable Linux kernel (2.6.33)"
+
+config BR2_LINUX_2_6_33
+	bool "Linux 2.6.33"
+	select BR2_KERNEL_BASE
+
+config BR2_LINUX_2_6_32
+	bool "Linux 2.6.32"
+	select BR2_KERNEL_BASE
+
+config BR2_LINUX_2_6_31
+	bool "Linux 2.6.31"
+	select BR2_KERNEL_BASE
 
 config BR2_LINUX_2_6_30
 	bool "Linux 2.6.30"
@@ -130,29 +118,13 @@ config BR2_LINUX_2_6_30
 config BR2_LINUX_2_6_29
 	bool "Linux 2.6.29"
 	select BR2_KERNEL_BASE
-	
+
 config BR2_LINUX_2_6_28
 	bool "Linux 2.6.28"
 	select BR2_KERNEL_BASE
 
 config BR2_LINUX_2_6_27
 	bool "Linux 2.6.27"
-	select BR2_KERNEL_BASE
-
-config BR2_LINUX_2_6_26
-	bool "Linux 2.6.26"
-	select BR2_KERNEL_BASE
-
-config BR2_LINUX_2_6_25
-	bool "Linux 2.6.25"
-	select BR2_KERNEL_BASE
-
-config BR2_LINUX_2_6_24
-	bool "Linux 2.6.24"
-	select BR2_KERNEL_BASE
-
-config BR2_LINUX_2_6_31
-	bool "Linux 2.6.31"
 	select BR2_KERNEL_BASE
 
 config BR2_LINUX26_CUSTOM
@@ -243,16 +215,6 @@ config BR2_KERNEL_ADD_SNAPSHOT
 	depends on !BR2_KERNEL_ADD_LATEST
 	select BR2_KERNEL_ADD_PATCH
 
-config BR2_KERNEL_ADD_LATEST_MM_PATCH
-	bool "Add _latest_ '-mm' patch for the stable linux kernel"
-	depends on BR2_KERNEL_ADD_LATEST
-	select BR2_KERNEL_ADD_PATCH
-
-config BR2_KERNEL_ADD_MM_PATCH
-	bool "Add an '-mm#' patch for the stable linux kernel"
-	depends on !BR2_KERNEL_ADD_LATEST
-	select BR2_KERNEL_ADD_PATCH
-
 endchoice
 
 config BR2_KERNEL_ADD_PATCH
@@ -273,11 +235,6 @@ config BR2_KERNEL_GIT_LEVEL
 	default ""
 	depends on BR2_KERNEL_ADD_SNAPSHOT
 
-config BR2_KERNEL_MM_LEVEL
-	string "-mm patch level"
-	default ""
-	depends on BR2_KERNEL_ADD_MM_PATCH
-
 source "target/device/Config.in.linux.patches"
 
 config BR2_LINUX_BSP_PATCH
@@ -296,8 +253,6 @@ config BR2_KERNEL_PATCH
 	default "patch-$(BR2_LINUX26_RC_VERSION).bz2" if					BR2_KERNEL_ADD_RC_PATCH
 	default "patch-$(LINUX26_LATEST_GIT_VERSION).bz2" if					BR2_KERNEL_ADD_LATEST_SNAPSHOT
 	default "patch-$(BR2_LINUX26_SNAPSHOT_VERSION).bz2" if					BR2_KERNEL_ADD_SNAPSHOT
-	default "$(LINUX26_LATEST_MM_VERSION).bz2" if						BR2_KERNEL_ADD_LATEST_MM_PATCH
-	default "$(BR2_LINUX26_MM_VERSION).bz2"	if						BR2_KERNEL_ADD_MM_PATCH
 	default "$(BR2_CUSTOM_LINUX26_PATCH)" if						BR2_LINUX26_CUSTOM
 
 config BR2_EXTRA_VERSION
@@ -308,8 +263,6 @@ config BR2_EXTRA_VERSION
 	default "$(BR2_KERNEL_RC_LEVEL)" if					BR2_KERNEL_ADD_RC_PATCH
 	default "$(BR2_KERNEL_GIT_LEVEL)" if					BR2_KERNEL_ADD_LATEST_SNAPSHOT
 	default "$(BR2_KERNEL_GIT_LEVEL)" if					BR2_KERNEL_ADD_SNAPSHOT
-	default	"$(BR2_KERNEL_MM_LEVEL)" if					BR2_KERNEL_ADD_LATEST_MM_PATCH
-	default	"$(BR2_KERNEL_MM_LEVEL)" if					BR2_KERNEL_ADD_MM_PATCH
 	default	"$(BR2_CUSTOM_LINUX26_VERSION)" if				BR2_LINUX26_CUSTOM
 endmenu
 
@@ -339,8 +292,6 @@ config BR2_LINUX26_VERSION
 	default "$(BR2_LINUX26_RC_VERSION)" if					BR2_KERNEL_ADD_RC_PATCH		&& BR2_KERNEL_BASE
 	default "$(LINUX26_LATEST_GIT_VERSION)" if 				BR2_KERNEL_ADD_LATEST_SNAPSHOT
 	default "$(BR2_LINUX26_SNAPSHOT_VERSION)" if				BR2_KERNEL_ADD_SNAPSHOT		&& BR2_KERNEL_BASE
-	default "$(LINUX26_LATEST_MM_VERSION)" if 				BR2_KERNEL_ADD_LATEST_MM_PATCH
-	default "$(BR2_LINUX26_MM_VERSION)" if					BR2_KERNEL_ADD_MM_PATCH		&& BR2_KERNEL_BASE
 	default "$(BR2_KERNEL_THIS_VERSION)" if				      ! BR2_KERNEL_ADD_PATCH		&& BR2_KERNEL_BASE
 	default "$(BR2_KERNEL_CURRENT_VERSION)"if				BR2_LINUX_2_6_STABLE
 	default "$(BR2_CUSTOM_LINUX26_VERSION)" if				BR2_LINUX26_CUSTOM

@@ -107,6 +107,7 @@ endif
 ifndef GCC_NO_MPFR
 GCC_WITH_HOST_GMP=--with-gmp=$(GMP_HOST_DIR)
 GCC_WITH_HOST_MPFR=--with-mpfr=$(MPFR_HOST_DIR)
+HOST_SOURCE += host-libgmp-source host-libmpfr-source
 
 ifeq ($(BR2_INSTALL_FORTRAN),y)
 GCC_TARGET_LANGUAGES:=$(GCC_TARGET_LANGUAGES),fortran
@@ -456,6 +457,10 @@ endif
 endif
 GCC_INCLUDE_DIR:=include
 ifeq ($(findstring x4.3,x$(GCC_VERSION)),x4.3)
+GCC_LIB_SUBDIR=lib/gcc/$(REAL_GNU_TARGET_NAME)/$(GCC_VERSION)
+GCC_INCLUDE_DIR:=include-fixed
+endif
+ifeq ($(findstring x4.4,x$(GCC_VERSION)),x4.4)
 GCC_LIB_SUBDIR=lib/gcc/$(REAL_GNU_TARGET_NAME)/$(GCC_VERSION)
 GCC_INCLUDE_DIR:=include-fixed
 endif

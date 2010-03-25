@@ -1,14 +1,106 @@
-2010.02, Not yet released:
+2010.05, Not yet released
+
+	Toolchain: uClibc 0.9.30.3, older 0.9.30.x removed. 2.6.33
+	kernel headers.
+
+	X.org updated to 7.5.
+
+	New packages: librsync, lmbench, netperf, squid
+
+	Updated/fixed packages: busybox, dosfstools, e2fsprogs,
+	freetype, iperf, less, libglib2, libpng, mdadm, memstat,
+	mtd-utils, nano, pppd, setserial, squashfs, wget
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#513: Add new squid package
+	#661: lmbench: new package
+	#800: [PATCH] iperf update to 2.0.4
+	#805: [PATCH] mdadm - version update
+	#1105: Add new netperf package
+	#1111: Bump wget to 1.12 and migrate to Makefile.autotools.in
+	#1117: Bump nano to 2.2.3 and migrate to Makefile.autotools.in
+	#1123: Bump less to 436 and migrate to Makefile.autotools.in
+	#1129: Bump memstat to 0.8 and migrate to Makefile.package.in
+	#1273: BR2_INET_IPV6 does not enable IPv6 in pppd
+	#1303: Add librsync package
+	#1345: Bump pppd to 2.4.5 and convert to Makefile.autotools.in
+
+2010.02, Release February 26th, 2010:
+
+	Fixes all over the tree.
+
+	Updated/fixed packages: avahi, busybox, cramfs, ipsec-tools, libcgicc,
+	libgtk2, libraw1394, madplay, netsnmp, pango, squashfs, sylpheed, qt,
+	xfont_font-util
+
+	Removed packages: hostap, openmotif, xpdf
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#165: openmotif does not build
+	#1147: Remove obsolete hostap package
+	#1183: make source fails to download gmp, mpfr and patches
+
+2010.02-rc2, Released February 23th, 2010:
+
+	Fixes all over the tree and new features.
+
+	New packages: intltool
+
+	Updated/fixed packages: ace_of_penguins, alsa-lib, alsa-utils, argus,
+	at, automake, ccache, dosfstools, e2fsprogs, flex, gob2, gmpc,
+	gst-plugins-good, imagemagick, iw, kexec, libeXosip, libgtk2,
+	libpcap, libpng, libsoup, libxcb, libxml-parser-perl, libxml2,
+	libxslt, lvm2, matchbox, mplayer, rsync, rubix, shared-mime-info,
+	tcl, webkit, xapp_mkfontscale, xfont_encodings, xfont_font-util,
+	xlib_libfontenc, xproto_trapproto, zlib
+
+	Removed package: xboard
+
+	Issues resolved (http://bugs.uclibc.org):
+
+	#335: atk looks for the path to the gnome library on the host
+	#355: Please update WebKit - it doesn't compile!
+	#453: libglib2 autoreconf
+	#457: e2fsprogs link problem
+	#459: libgtk2 autoreconf
+	#469: build of libgtk2 for host incorrectly assumes that X.org ...
+	#671: Bash fails to build when building buildront on Ubuntu 9.04
+	#711: WebKit host dependencies problems
+	#821: cp: illegal operation
+	#1039: Not compiled on ubuntu karmic
+	#1069: [PATCH] The AT91BOOTSTRAP makefile contains a typo
+
+2010.02-rc1, Released February 9th, 2010:
+
+	Fixes all over the tree and new features.
+
+	Generalized autotools infrastructure to be usable for
+	non-autotools packages, see package/Makefile.package.in for
+	details.
+
+	Cleaned up avr32 toolchain config, external source-based
+	toolchain support is gone.
+
+	Dependency checks: Also check for makeinfo, only print output
+	on errors.
 
 	Toolchain: uClibc 0.9.30.2, gcc 4.4.3
 
-	New packages: libcdaudio, libdvdnav, libdvdread, hostapd, tcpreplay
+	New packages: libcdaudio, libdvdnav, libdvdread, hostapd, ser2net,
+	tcpreplay
 
-	Updated/fixed packages: autoconf, bind, binutils, bootutils, busybox,
-	directfb, e2fsprogs, gstreamer, gst-plugins-bad, hal, iptables,
-	iw, jpeg, kismet, libfuse, libpcap, libungif, lighttpd, mesa, mpg123,
-	mtd-utils, neon, openvpn, pcre, qt, rpm, sqlite, sshfs, tremor,
-	u-boot, usb_modeswitch, usbutils, wpa_supplicant, xfsprogs
+	Updated/fixed packages: alsa-lib, alsa-utils, at, autoconf, bash,
+	bind, binutils, bootutils, busybox, dbus, directfb, dnsmasq,
+	e2fsprogs, gstreamer, gperf, gst-plugins-bad, gvfs, fbdump, flex,
+	hal, iptables, iw, jpeg, kismet, libfuse, libglib2, liboil, libpcap,
+	libungif, libxml2, libxslt, lighttpd, mesa, mpg123, mtd-utils, nbd,
+	neon, netstat-nat, newt, openvpn, pcre, php, qt, rdesktop, readline,
+	rpm, sawman, sdl, sdl_ttf, sqlite, sshfs, tremor, u-boot,
+	usb_modeswitch, usbutils, webkit, wpa_supplicant, xfsprogs, zlib
+
+	Removed package: asterisk, openswan
 
 	Issues resolved (http://bugs.uclibc.org):
 
@@ -37,6 +129,14 @@
 	#931: Bump kismet package to 2010-01-R1
 	#937: Bump openvpn package to 2.1.1
 	#943: Bump sqlite package to 3.6.22
+	#961: Bump dnsmasq to 2.52
+	#967: Bump netstat-nat to 1.4.10
+	#973: Bump iw to 0.9.19
+	#1003: DHCP options disabled with busybox-1.16.0
+	#1009: [SECURITY] Bump php to 5.2.12
+	#1015: [SECURITY] Bump bind to 9.5.1-P2
+	#1027: Busybox flash commands conflict with those from mtd-utils
+	#1063: [SECURITY] Update lighttpd to 1.4.26
 
 2009.11, Released December 1st, 2009:
 
@@ -89,7 +189,7 @@
 	shared-mime-info, sfdisk, spawn-fcgi, speech-tools, sqlite, squashfs,
 	synergy, syslinux, sysklogd, target-binutils, tcpdump, torsmo, u-boot,
 	udpcast, util-linux, valgrind, vsftpd, wipe, wpa-supplicant, x11vnc,
-	xdata_xcursor-themes, xboard, xfsprogs, xstroke, zlib
+	xdata_xcursor-themes, xboard, xfsprogs, xstroke, zlib[5~
 
 	Removed package: mdnsresponder, mpatrol, gcc 3.4.6 + 4.0.4, vice
 

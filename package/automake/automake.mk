@@ -11,9 +11,15 @@ ifeq ($(BR2_ENABLE_DEBUG),y) # install-exec doesn't install aclocal stuff
 AUTOMAKE_INSTALL_TARGET_OPT = DESTDIR=$(TARGET_DIR) install
 endif
 
-AUTOMAKE_DEPENDENCIES = autoconf microperl
+AUTOMAKE_DEPENDENCIES = host-autoconf autoconf microperl
 
 HOST_AUTOMAKE_DEPENDENCIES = host-autoconf
+
+define GTK_DOC_M4_INSTALL
+ $(INSTALL) -m 0644 package/automake/gtk-doc.m4 $(STAGING_DIR)/usr/share/aclocal/
+endef
+
+HOST_AUTOMAKE_POST_INSTALL_HOOKS += GTK_DOC_M4_INSTALL
 
 $(eval $(call AUTOTARGETS,package,automake))
 $(eval $(call AUTOTARGETS,package,automake,host))

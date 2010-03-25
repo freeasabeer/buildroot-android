@@ -30,7 +30,23 @@ define ZLIB_CONFIGURE_CMDS
 	)
 endef
 
+define HOST_ZLIB_CONFIGURE_CMDS
+	(cd $(@D); rm -rf config.cache; \
+		$(HOST_CONFIGURE_ARGS) \
+		$(HOST_CONFIGURE_OPTS) \
+		CFLAGS="$(ZLIB_PIC)" \
+		./configure \
+		$(ZLIB_SHARED) \
+		--prefix="$(HOST_DIR)/usr" \
+		--sysconfdir="$(HOST_DIR)/etc" \
+	)
+endef
+
 define ZLIB_BUILD_CMDS
+	$(MAKE) -C $(@D) all libz.a
+endef
+
+define HOST_ZLIB_BUILD_CMDS
 	$(MAKE) -C $(@D) all libz.a
 endef
 
@@ -41,10 +57,17 @@ define ZLIB_INSTALL_STAGING_CMDS
 	cp -dpf $(@D)/libz.so* $(STAGING_DIR)/usr/lib/
 endef
 
+define HOST_ZLIB_INSTALL_CMDS
+	$(INSTALL) -D $(@D)/libz.a $(HOST_DIR)/usr/lib/libz.a
+	$(INSTALL) -D $(@D)/zlib.h $(HOST_DIR)/usr/include/zlib.h
+	$(INSTALL) $(@D)/zconf.h $(HOST_DIR)/usr/include/
+	cp -dpf $(@D)/libz.so* $(HOST_DIR)/usr/lib/
+endef
+
 ifeq ($(BR2_HAVE_DEVFILES),y)
 define ZLIB_INSTALL_TARGET_HEADERS
-	$(INSTALL) -D $(@D)/zlib.h $(STAGING_DIR)/usr/include/zlib.h
-	$(INSTALL) $(@D)/zconf.h $(STAGING_DIR)/usr/include/
+	$(INSTALL) -D $(@D)/zlib.h $(TARGET_DIR)/usr/include/zlib.h
+	$(INSTALL) $(@D)/zconf.h $(TARGET_DIR)/usr/include/
 endef
 endif
 
@@ -57,3 +80,5 @@ define ZLIB_INSTALL_TARGET_CMDS
 endef
 
 $(eval $(call GENTARGETS,package,zlib))
+$(eval $(call GENTARGETS,package,zlib,host))
+

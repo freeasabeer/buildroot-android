@@ -9,7 +9,6 @@ GST_PLUGINS_GOOD_SITE = http://gstreamer.freedesktop.org/src/gst-plugins-good
 GST_PLUGINS_GOOD_LIBTOOL_PATCH = NO
 
 GST_PLUGINS_GOOD_CONF_OPT = \
-		$(DISABLE_NLS) \
 		--disable-debug \
 		--disable-examples \
 		--disable-directsound \
@@ -316,6 +315,13 @@ GST_PLUGINS_GOOD_CONF_OPT += --enable-soup
 GST_PLUGINS_GOOD_DEPENDENCIES += libsoup
 else
 GST_PLUGINS_GOOD_CONF_OPT += --disable-soup
+endif
+
+ifeq ($(BR2_PACKAGE_GST_PLUGINS_GOOD_PLUGIN_SPEEX),y)
+GST_PLUGINS_GOOD_CONF_OPT += --enable-speex
+GST_PLUGINS_GOOD_DEPENDENCIES += speex
+else
+GST_PLUGINS_GOOD_CONF_OPT += --disable-speex
 endif
 
 $(eval $(call AUTOTARGETS,package/multimedia,gst-plugins-good))

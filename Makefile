@@ -1,7 +1,7 @@
 # Makefile for buildroot2
 #
 # Copyright (C) 1999-2005 by Erik Andersen <andersen@codepoet.org>
-# Copyright (C) 2006-2009 by the Buildroot developers <buildroot@uclibc.org>
+# Copyright (C) 2006-2010 by the Buildroot developers <buildroot@uclibc.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -262,11 +262,9 @@ TARGET_DIR:=$(BASE_DIR)/target
 
 # define values for prepatched source trees for toolchains
 VENDOR_SITE:=$(call qstrip,$(BR2_VENDOR_SITE))
-VENDOR_SUFFIX:=$(call qstrip,$(BR2_VENDOR_SUFFIX))
 VENDOR_BINUTILS_RELEASE:=$(call qstrip,$(BR2_VENDOR_BINUTILS_RELEASE))
 VENDOR_GCC_RELEASE:=$(call qstrip,$(BR2_VENDOR_GCC_RELEASE))
 VENDOR_UCLIBC_RELEASE:=$(call qstrip,$(BR2_VENDOR_UCLIBC_RELEASE))
-VENDOR_GDB_RELEASE:=$(call qstrip,$(BR2_VENDOR_GDB_RELEASE))
 VENDOR_PATCH_DIR:=$(call qstrip,$(BR2_VENDOR_PATCH_DIR))
 
 BR2_DEPENDS_DIR=$(BUILD_DIR)/buildroot-config
@@ -374,6 +372,7 @@ ifneq ($(BR2_TOOLCHAIN_EXTERNAL),y)
 endif
 endif
 	@mkdir -p $(STAGING_DIR)/usr/include
+	@mkdir -p $(STAGING_DIR)/usr/bin
 
 $(BUILD_DIR)/.root:
 	mkdir -p $(TARGET_DIR)
@@ -637,11 +636,9 @@ help:
 	@echo 'See docs/README and docs/buildroot.html for further details'
 	@echo
 
-release: distclean
+release:
 	OUT=buildroot-$$(grep -A2 BR2_VERSION $(CONFIG_CONFIG_IN)|grep default|cut -f2 -d\"); \
-	rm -rf ../$$OUT*; cp -al . ../$$OUT; cd ..; \
-	tar cfz $$OUT.tar.gz --exclude .svn --exclude .git --exclude \*~ $$OUT; \
-	rm -rf $$OUT
+	git archive --format=tar --prefix=$$OUT/ master|gzip -9 >$$OUT.tar.gz
 
 .PHONY: $(noconfig_targets)
 

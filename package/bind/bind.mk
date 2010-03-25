@@ -4,7 +4,7 @@
 #
 #############################################################
 
-BIND_VERSION = 9.5.2-P1
+BIND_VERSION = 9.5.2-P2
 BIND_SITE = ftp://ftp.isc.org/isc/bind9/$(BIND_VERSION)
 BIND_LIBTOOL_PATCH = NO
 BIND_INSTALL_STAGING = NO
@@ -16,7 +16,7 @@ BIND_TARGET_BINS = dig host nslookup nsupdate
 BIND_TARGET_LIBS = libbind9.* libdns.* libisccc.* libisccfg.* libisc.* liblwres.*
 BIND_CONF_ENV =	BUILD_CC="$(TARGET_CC)" \
 		BUILD_CFLAGS="$(TARGET_CFLAGS)"
-BIND_CONF_OPT =	$(DISABLE_IPV6) \
+BIND_CONF_OPT =	\
 		--sysconfdir=/etc \
 		--localstatedir=/var \
 		--with-randomdev=/dev/urandom \
