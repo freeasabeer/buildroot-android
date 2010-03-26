@@ -1,0 +1,11 @@
+--- nano-2.2.3/src/Makefile.in.orig	2010-03-25 22:22:14.000000000 +0100
++++ nano-2.2.3/src/Makefile.in	2010-03-25 22:26:34.000000000 +0100
+@@ -286,7 +286,7 @@ clean-binPROGRAMS:
+ 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+ nano$(EXEEXT): $(nano_OBJECTS) $(nano_DEPENDENCIES) 
+ 	@rm -f nano$(EXEEXT)
+-	$(LINK) $(nano_OBJECTS) $(nano_LDADD) $(LIBS)
++	$(LINK) -static $(nano_OBJECTS) $(nano_LDADD) $(LIBS)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)

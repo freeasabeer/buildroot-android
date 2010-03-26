@@ -12,6 +12,10 @@ NANO_DEPENDENCIES = ncurses
 
 $(eval $(call AUTOTARGETS,package,nano))
 
+$(NANO_HOOK_POST_EXTRACT):
+	toolchain/patch-kernel.sh $(NANO_DIR) package/editors/nano/ nano-*.patch
+	touch $@
+
 $(NANO_TARGET_INSTALL_TARGET):
 	$(call MESSAGE,"Installing to target")
 	$(INSTALL) -m 0755 $(NANO_DIR)/src/nano \
